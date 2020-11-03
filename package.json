@@ -1,0 +1,70 @@
+{
+    "name": "rl_mapper",
+    "version": "0.1.0",
+    "private": true,
+    "main": "src/start.js",
+    "author": "Tom Rooman",
+    "description": "Play steam workshop maps with epic game version of rocket league",
+    "nodemonConfig": {
+        "ignore": [
+            "src/data.json"
+        ]
+    },
+    "scripts": {
+        "eslint": "eslint .",
+        "electron-start": "nodemon --ext js,ts,tsx --exec \"\"yarn electron .\"\"",
+        "make": "electron-packager . \"RL Mapper\" --platform=win32 --arch=x64 --ignore=\"/(.yarn|.eslintrc|.yarnrc.yml|tsconfig.json|node_modules|src/index.html|src/index.css|src/index.tsx|src/serviceWorker.ts|src/main.tsx|webpack.config.js|yarn.lock|.gitignore)\"",
+        "dev": "webpack-dev-server --open --mode development",
+        "build": "webpack --mode production"
+    },
+    "dependencies": {
+        "dotenv": "^8.2.0",
+        "electron-packager": "^15.1.0",
+        "react": "^17.0.1",
+        "react-dom": "^17.0.1",
+        "react-scripts": "^4.0.0",
+        "source-map-loader": "^1.1.2",
+        "webpack": "^4.43.0"
+    },
+    "devDependencies": {
+        "@types/react": "^16.9.55",
+        "@types/react-dom": "^16.9.9",
+        "@typescript-eslint/eslint-plugin": "4.6.1",
+        "@typescript-eslint/parser": "4.6.1",
+        "clean-webpack-plugin": "^3.0.0",
+        "css-loader": "^3.6.0",
+        "electron": "^10.1.5",
+        "electron-prebuilt-compile": "8.2.0",
+        "electron-reload": "^1.5.0",
+        "eslint": "^7.12.1",
+        "eslint-config-standard": "^16.0.1",
+        "eslint-config-standard-react": "^11.0.1",
+        "eslint-import-resolver-node": "^0.3.4",
+        "eslint-loader": "^4.0.2",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-promise": "^4.2.1",
+        "eslint-plugin-react": "^7.21.4",
+        "eslint-plugin-standard": "^4.0.2",
+        "html-loader": "^1.1.0",
+        "html-webpack-plugin": "^4.3.0",
+        "nodemon": "^2.0.6",
+        "ts-loader": "^8.0.7",
+        "typescript": "^4.0.5",
+        "url-loader": "^4.1.0",
+        "webpack-cli": "^3.3.12",
+        "webpack-dev-server": "^3.11.0"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
+}

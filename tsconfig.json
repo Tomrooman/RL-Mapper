@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "outDir": "./build/",
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "resolveJsonModule": true,
+        "module": "CommonJS",
+        "lib": [
+            "es2020",
+            "dom"
+        ],
+        "suppressImplicitAnyIndexErrors": true,
+        "target": "es5",
+        "jsx": "react",
+        "strict": true,
+        "declaration": false,
+        "esModuleInterop": true,
+        "skipLibCheck": true
+    }
+}
