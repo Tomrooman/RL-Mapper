@@ -48,8 +48,8 @@ const Main = (): React.ReactElement => {
                     <p>{data.RL && data.RL.map.default ? data.RL.map.default : 'Aucun fichier sélectionné'}</p>
                 </div>
                 <div className='menuSplit'>
-                    <h3>Chemin du dossier des map du workshop (.udk)</h3>
-                    <input type='file' id='folderMapPath' directory='true' onChange={handleSelectDirectory} />
+                    <h3>Chemin du dossier contenant vos maps du workshop (.udk)</h3>
+                    <input type='file' id='folderMapPath' onChange={handleSelectDirectory} />
                     <p>{data.RL && data.RL.map.folder ? data.RL.map.folder : 'Aucun dossier sélectionné'}</p>
                 </div>
             </div>
