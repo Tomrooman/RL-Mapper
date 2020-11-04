@@ -7,6 +7,7 @@
 .pnp.js
 .env
 yarn.lock
+data.json
 
 # testing
 /coverage

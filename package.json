@@ -13,8 +13,8 @@
     "scripts": {
         "eslint": "eslint .",
         "electron-start": "nodemon --ext js,ts,tsx --exec \"\"yarn electron .\"\"",
-        "make": "electron-packager . \"RL Mapper\" --platform=win32 --arch=x64 --ignore=\"/(.yarn|.eslintrc|.yarnrc.yml|tsconfig.json|node_modules|src/index.html|src/index.css|src/index.tsx|src/serviceWorker.ts|src/main.tsx|webpack.config.js|yarn.lock|.gitignore)\"",
-        "dev": "webpack-dev-server --open --mode development",
+        "make": "electron-packager . \"RL Mapper\" --platform=win32 --arch=x64 --ignore=\"/(.yarn|.env|.eslintrc|.yarnrc.yml|tsconfig.json|node_modules|src/index.html|src/index.css|src/index.tsx|src/serviceWorker.ts|src/main.tsx|webpack.config.js|yarn.lock|.gitignore)\"",
+        "dev": "webpack-dev-server --mode development",
         "build": "webpack --mode production"
     },
     "dependencies": {
@@ -22,7 +22,7 @@
         "electron-packager": "^15.1.0",
         "react": "^17.0.1",
         "react-dom": "^17.0.1",
-        "react-scripts": "^4.0.0",
+        "react-scripts": "^3.4.4",
         "source-map-loader": "^1.1.2",
         "webpack": "^4.43.0"
     },
@@ -32,6 +32,7 @@
         "@typescript-eslint/eslint-plugin": "4.6.1",
         "@typescript-eslint/parser": "4.6.1",
         "clean-webpack-plugin": "^3.0.0",
+        "copy-webpack-plugin": "^6.3.0",
         "css-loader": "^3.6.0",
         "electron": "^10.1.5",
         "electron-prebuilt-compile": "8.2.0",

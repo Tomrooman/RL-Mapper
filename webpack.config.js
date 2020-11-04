@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
 module.exports = {
@@ -84,6 +85,11 @@ module.exports = {
         }),
         new webpack.DefinePlugin({
             '__REACT_DEVTOOLS_GLOBAL_HOOK__': '({ isDisabled: true })'
+        }),
+        new CopyPlugin({
+            patterns: [
+                { from: './src/assets', to: 'assets' },
+            ],
         })
     ]
 };

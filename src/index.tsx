@@ -2,7 +2,7 @@
 import React from 'react';
 /* eslint-enable no-use-before-define */
 import ReactDOM from 'react-dom';
-import './index.css';
+import './assets/css/index.css';
 import Main from './main';
 import * as serviceWorker from './serviceWorker';
 
