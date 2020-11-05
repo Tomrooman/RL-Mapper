@@ -6,6 +6,7 @@ const fs = window.require('fs');
 interface dataType {
     RL: {
         map: {
+            status: boolean,
             default: {
                 path: string,
                 name: string
@@ -21,13 +22,13 @@ const Main = (): React.ReactElement => {
     const [loaded, setLoaded] = useState(false);
     const [dataPath, setDataPath] = useState('');
     const [data, setData] = useState({} as dataType);
-    const [workshopFiles, setWorkshopFiles] = useState([]);
+    const [workshopFiles, setWorkshopFiles] = useState([] as string[]);
+    const [activeFile, setActivefile] = useState(false);
 
     useEffect(() => {
         if (!loaded) {
             const path = process.env.NODE_ENV === 'production' ? './resources/app/src' : './src';
             const content = JSON.parse(fs.readFileSync(path + '/data.json', 'utf8'));
-            console.log('loaded data : ', content);
             setDataPath(path);
             setData(content);
             if (content.RL.map.workshop.path) getWorkshopList(content.RL.map.workshop.path);
@@ -36,20 +37,22 @@ const Main = (): React.ReactElement => {
     });
 
     const getWorkshopList = (path: string): void => {
+        const files: string[] = [];
         fs.readdirSync(path).forEach((file: string) => {
-            if (file.slice(-4) === '.udk')
-                console.log(file.slice(-4));
+            if (file.slice(-4) === '.udk') files.push(file);
         });
+        setWorkshopFiles(files);
     };
 
     const handleSelectFile = (e: ChangeEvent<HTMLInputElement>, type: string): void => {
         if (e && e.target && e.target.files && e.target.files.length) {
             if (type === 'default') {
                 if (data.RL.map.default) {
-                    const splittedDefault = data.RL.map.default.path.split('\\');
-                    const savedFilename = splittedDefault[splittedDefault.length - 1];
-                    fs.copyFileSync(dataPath + '/saved/' + savedFilename, data.RL.map.default.path);
-                    fs.unlinkSync(dataPath + '/saved/' + savedFilename);
+                    if (data.RL.map.status) {
+                        fs.unlinkSync(data.RL.map.default.path);
+                        fs.copyFileSync(dataPath + '/saved/' + data.RL.map.default.name, data.RL.map.default.path);
+                    }
+                    fs.unlinkSync(dataPath + '/saved/' + data.RL.map.default.name);
                 }
                 const filePath = (e.target.files[0] as any).path;
                 const filename = filePath.split('\\')[filePath.split('\\').length - 1];
@@ -79,7 +82,7 @@ const Main = (): React.ReactElement => {
                         <input type='file' id='defaultMapPath' onChange={(e): void => handleSelectFile(e, 'default')} />
                         <div className='bottomPath'>
                             {data.RL.map.default ?
-                                <p className='path pathG'>{data.RL.map.default.path}</p> :
+                                <p className='path pathG'>{data.RL.map.default.name}</p> :
                                 <p className='path pathR'>Aucun fichier sélectionné</p>
                             }
                         </div>
@@ -97,16 +100,22 @@ const Main = (): React.ReactElement => {
                 </div>
                 {workshopFiles && workshopFiles.length ?
                     <div className='workshopListContainer'>
-                        {workshopFiles.map(file => {
+                        {workshopFiles.map((file, index) => {
                             return (
-                                <p>{file}</p>
+                                <div className='workshopItem' key={index}>
+                                    <p>{file}</p>
+                                </div>
                             );
                         })} </div> :
-                    <div className='workshopListContainer'>
+                    <div className='workshopListContainerEmpty'>
                         <div className='workshopListEmpty'>
                             <h1>Pas de dossier sélectionné</h1>
                         </div>
                     </div>}
+                <div className='actionContainer'>
+                    <span className={activeFile ? 'btnApply' : 'btnApplyDisabled'}>Appliquer</span>
+                    <span className={data.RL.map.default.path ? 'btnDefault' : 'btnDefaultDisabled'}>Remettre par défaut</span>
+                </div>
             </div>
         );
     }
