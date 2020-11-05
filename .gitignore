@@ -15,6 +15,7 @@ data.json
 # production
 /build
 RL Mapper-win32-x64
+saved
 
 # misc
 .DS_Store

@@ -1,30 +1,93 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Bree Serif', serif;
+    background: rgb(247, 247, 247);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.menuContainer {
+    display: flex;
+    align-items: center;
 }
 
-.click {
-  color: purple;
-  cursor: pointer;
-  transition: all .2s;
+.defaultMapTitle, .workshopMapTitle {
+    margin-top: 0.5rem;
+    margin-bottom : 0;
 }
 
-.click:hover {
-  transition: all .2s;
-  color: green;
-  font-size: 2.6rem;
+.workshopMapTitle {
+    margin-bottom: 1rem;
+}
+
+.defaultInfosFolder {
+    font-size: 0.8rem;
+    margin-top: .2rem;
 }
 
 .mainTitle {
-  text-align: center;
-  border: 1px solid black;
+    text-align: center;
+    padding-top: .5rem;
+    height: 10vh;
+    margin-bottom : 0;
+    margin-top : 0;
+}
+
+.menuSplit {
+    width: 48.5%;
+    border: 1px solid rgb(202, 202, 202);
+    box-shadow: 0px 0px 5px rgb(196, 196, 196);
+    background: rgb(255, 255, 255);
+    margin-left: 0.5rem;
+    height: 30vh;
+    padding-left: 0.5rem;
+    position: relative;
+    overflow-wrap: break-word;
+    margin-bottom: 0.5rem;
+    border-radius: 5px;
+}
+
+.menuSplit:nth-child(2) {
+    margin-right: 0.5rem;
+}
+
+.bottomPath {
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    margin-bottom : 1rem;
+    word-break: break-all;
+}
+
+.path {
+    margin-top : 0;
+    margin-bottom : 0;
+    font-size: 0.9rem;
+}
+
+.pathR {
+    color: rgb(226, 74, 74);
+}
+
+.pathG {
+    color: rgb(35, 136, 44);
+}
+
+.workshopListContainer {
+    border: 1px solid rgb(202, 202, 202);
+    box-shadow: 0px 0px 5px rgb(196, 196, 196);
+    background: rgb(255, 255, 255);
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 54vh;
+}
+
+.workshopListEmpty {
+    letter-spacing: 4px;;
+    color: rgb(226, 74, 74);
 }
