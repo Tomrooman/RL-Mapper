@@ -1,12 +1,25 @@
-* {
-    transition: all 0.2s;
-}
-
 body {
     height: 100vh;
     margin: 0;
     font-family: 'Bree Serif', serif;
     background: rgb(247, 247, 247);
+}
+
+.statusContainer {
+    display: flex;
+    left: 0;
+    position: absolute;
+    padding-top: 0.25rem;
+    padding-left: 1rem;
+}
+
+.statusContainer p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.statusValue {
+    margin-left: 0.3rem;
 }
 
 .menuContainer {
@@ -29,11 +42,15 @@ body {
 }
 
 .mainTitle {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainTitle h1 {
     padding-top: .5rem;
-    height: 10vh;
-    margin-bottom : 0;
-    margin-top : 0;
+    padding-bottom: 0.5rem;
+    margin: 0;
 }
 
 .menuSplit {
@@ -93,14 +110,51 @@ body {
     overflow-y: auto;
 }
 
+.workshopListContainer h3 {
+    color: white;
+    font-weight: lighter;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    letter-spacing: 2px;
+    text-align: center;
+    margin: 0;
+    border-bottom: 1px solid rgb(202, 202, 202);
+    background: #427baf;
+}
+
 .workshopItem {
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0);
     word-break: break-all;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
-    padding-top : 1rem;
-    padding-bottom : 1rem;
+    padding-top : 0.5rem;
+    padding-bottom : 0.5rem;
     border-bottom: 1px solid rgb(202, 202, 202);
     cursor: pointer;
+    transition: all 0.2s;
+}
+
+.workshopItem img {
+    margin-right: 1rem;
+    max-width: 3rem;
+    max-height: 3rem;
+    height: 3rem;
+    width: auto;
+}
+
+.workshopListContainer .workshopItem:first-child {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.workshopItem.active {
+    transition: all 0.2s;
+    color: #114c16;
+    border: 1px solid #75a187 !important;
+    background: #98d39c !important;
+    letter-spacing: 2px !important;
 }
 
 .workshopItem p {
@@ -108,10 +162,11 @@ body {
 }
 
 .workshopItem:hover {
-    background: rgb(211, 211, 211);
-}
-
-.workshopItem:hover p {
+    box-shadow: 0px 0px 5px rgb(196, 196, 196);
+    transition: all 0.2s;
+    color: #29442b;
+    border: 1px solid #75a187;
+    background: #d4fad7;
     letter-spacing: 2px;
 }
 
@@ -131,17 +186,19 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
+    bottom: 0;
 }
 
 .actionContainer span {
     color: white;
     margin-left: 1rem;
     border-radius: 5px;
-    height: 4vh;
+    max-height: 40px;
     padding: 0.5rem 1rem;
 }
 
 .btnApply {
+    transition: all 0.2s;
     cursor: pointer;
     border: 1px solid #5a9271;
     border-bottom: 4px solid #537e65;
@@ -149,6 +206,7 @@ body {
 }
 
 .btnApplyDisabled {
+    transition: all 0.2s;
     cursor: not-allowed;
     opacity: 0.6;
     border: 1px solid #5a9271;
@@ -157,6 +215,7 @@ body {
 }
 
 .btnDefault {
+    transition: all 0.2s;
     cursor: pointer;
     border: 1px solid #466e99;
     border-bottom: 4px solid #3f5c7a;
@@ -164,6 +223,7 @@ body {
 }
 
 .btnDefaultDisabled {
+    transition: all 0.2s;
     cursor: not-allowed;
     opacity: 0.6;
     border: 1px solid #466e99;
