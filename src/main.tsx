@@ -64,7 +64,7 @@ const Main = (): React.ReactElement => {
     const handleSelectFile = (e: React.ChangeEvent<HTMLInputElement>, type: string): void => {
         if (e && e.target && e.target.files && e.target.files.length) {
             if (type === 'default') {
-                if (data.map.default) {
+                if (data.map.default.path) {
                     if (data.status) {
                         // If map is modified, remove workshop file in %RL_FOLDER% and place the saved one in it
                         fs.unlinkSync(data.map.default.path);
