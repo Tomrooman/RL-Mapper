@@ -13,7 +13,7 @@
     "scripts": {
         "eslint": "eslint .",
         "electron-start": "nodemon --ext js,ts,tsx --exec \"\"yarn electron .\"\"",
-        "make": "electron-packager . \"RL Mapper\" --platform=win32 --arch=x64 --ignore=\"/(.yarn|.env|.eslintrc|.yarnrc.yml|tsconfig.json|node_modules|src/index.html|src/index.css|src/index.tsx|src/serviceWorker.ts|src/main.tsx|webpack.config.js|yarn.lock|.gitignore)\"",
+        "make": "electron-packager . \"RL Mapper\" --platform=win32 --arch=x64 --ignore=\"/(app|.yarn|.env|.eslintrc|.yarnrc.yml|tsconfig.json|node_modules|src/index.html|src/index.css|src/index.tsx|src/serviceWorker.ts|src/main.tsx|webpack.config.js|yarn.lock|.gitignore)\"",
         "dev": "webpack-dev-server --mode development",
         "build": "webpack --mode production"
     },
@@ -47,6 +47,7 @@
         "eslint-plugin-promise": "^4.2.1",
         "eslint-plugin-react": "^7.21.4",
         "eslint-plugin-standard": "^4.0.2",
+        "file-loader": "^6.2.0",
         "html-loader": "^1.1.0",
         "html-webpack-plugin": "^4.3.0",
         "nodemon": "^2.0.6",

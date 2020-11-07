@@ -51,6 +51,10 @@ const Main = (): React.ReactElement => {
     const getWorkshopList = (path: string, type: string, funcDataPath: string): void => {
         const files: filesType[] = [];
         const pictures: string[] = [];
+        const argvSplitted = process.argv[0].split('\\');
+        let filePath = '';
+        if (process.env.NODE_ENV === 'production') filePath = argvSplitted.slice(0, argvSplitted.length - 1).join('\\') + '\\resources\\app\\src';
+        else filePath = funcDataPath;
         if (type === 'update') {
             fs.readdirSync(funcDataPath + '/saved/thumbnails/').forEach((file: string) => {
                 fs.unlinkSync(funcDataPath + '/saved/thumbnails/' + file);
@@ -64,7 +68,7 @@ const Main = (): React.ReactElement => {
         files.map(file => {
             return pictures.forEach(picture => {
                 if (type === 'update') fs.copyFileSync(path + '\\' + picture, funcDataPath + '/saved/thumbnails/' + picture);
-                if (picture.slice(0, picture.length - 4) === file.name.slice(0, file.name.length - 4)) file.thumbnail = funcDataPath + '/saved/thumbnails/' + picture;
+                if (picture.slice(0, picture.length - 4) === file.name.slice(0, file.name.length - 4)) file.thumbnail = filePath + '/saved/thumbnails/' + picture;
             });
         });
         setWorkshopFiles(files);
@@ -177,7 +181,7 @@ const Main = (): React.ReactElement => {
                             onChange={(e): void => handleSelectFile(e, 'default')}
                         />
                         <div className='bottomPath'>
-                            {data.map.default ?
+                            {data.map.default.path ?
                                 <p className='path pathG'>{data.map.default.name}</p> :
                                 <p className='path pathR'>Aucun fichier sélectionné</p>
                             }
