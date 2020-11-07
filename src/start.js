@@ -3,7 +3,7 @@ const app = electron.app;
 const path = require('path');
 const BrowserWindow = electron.BrowserWindow;
 
-// # For development
+// # Comment for production
 require('dotenv').config();
 // -------------------------- #
 
@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === 'DEV') require('electron-reload');
 function createWindow() {
     mainWindow = new BrowserWindow({
         width: 800,
-        height: 600,
+        height: 650,
         webPreferences: {
             nodeIntegration: true
         }

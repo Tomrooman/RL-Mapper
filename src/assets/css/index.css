@@ -1,25 +1,47 @@
+.RLContainer {
+    position :relative;
+    height: 97vh;
+    width: 100%;
+}
+
 body {
-    height: 100vh;
     margin: 0;
     font-family: 'Bree Serif', serif;
     background: rgb(247, 247, 247);
 }
 
-.statusContainer {
-    display: flex;
+.topInfosContainer {
     left: 0;
     position: absolute;
-    padding-top: 0.25rem;
-    padding-left: 1rem;
+    margin-left: 0.5rem;
+}
+
+.statusContainer, .mapContainer {
+    display: flex;
 }
 
 .statusContainer p {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
     margin: 0;
     font-size: 0.9rem;
 }
 
+.mapContainer p {
+    color: rgb(103, 66, 172);
+    margin: 0;
+    font-size: 0.8rem;
+    padding-right: 0.25rem;
+    padding-left: 0.25rem;
+}
+
+.statusLabel {
+    padding-left: 0.25rem;
+}
+
 .statusValue {
     margin-left: 0.3rem;
+    padding-right: 0.25rem;
 }
 
 .menuContainer {
@@ -60,6 +82,7 @@ body {
     background: rgb(255, 255, 255);
     margin-left: 0.5rem;
     height: 25vh;
+    max-height: 175px;
     padding-left: 0.5rem;
     position: relative;
     overflow-wrap: break-word;
@@ -96,25 +119,29 @@ body {
 }
 
 .workshopListContainer, .workshopListContainerEmpty {
-    border: 1px solid rgb(202, 202, 202);
     border-radius: 5px;
-    box-shadow: 0px 0px 5px rgb(196, 196, 196);
-    background: rgb(255, 255, 255);
     margin-left: 0.5rem;
     margin-right: 0.5rem;
     margin-bottom: 0.5rem;
-    height: 51vh;
+    height: 49vh;
 }
 
-.workshopListContainer {
+.workshopList {
+    height: 97%;
+    border: 1px solid rgb(202, 202, 202);
+    border-top-style: hidden;
+    box-shadow: 0px 0px 5px rgb(196, 196, 196);
+    background: rgb(255, 255, 255);
     overflow-y: auto;
 }
 
-.workshopListContainer h3 {
+.workshopListContainer h4 {
     color: white;
     font-weight: lighter;
     padding-top: 0.3rem;
     padding-bottom: 0.3rem;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     letter-spacing: 2px;
     text-align: center;
     margin: 0;
@@ -144,11 +171,6 @@ body {
     width: auto;
 }
 
-.workshopListContainer .workshopItem:first-child {
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-
 .workshopItem.active {
     transition: all 0.2s;
     color: #114c16;
@@ -162,7 +184,6 @@ body {
 }
 
 .workshopItem:hover {
-    box-shadow: 0px 0px 5px rgb(196, 196, 196);
     transition: all 0.2s;
     color: #29442b;
     border: 1px solid #75a187;
@@ -183,10 +204,10 @@ body {
 
 .actionContainer {
     display: flex;
+    position: absolute;
+    width: 100%;
     justify-content: center;
-    align-items: center;
-    text-align: center;
-    bottom: 0;
+    margin-top: 1.5rem;
 }
 
 .actionContainer span {
@@ -229,4 +250,77 @@ body {
     border: 1px solid #466e99;
     border-bottom: 4px solid #3f5c7a;
     background: #5F8DBD;
+}
+
+.notifContainer {
+    opacity: 0;
+    transition: all 1s;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    top: 0%;
+    left: 50%;
+    color :white;
+}
+
+.notifContainer.active {
+    transition: all 1s;
+    opacity: 1;
+    top: 5%;
+}
+
+.title, .map {
+    position: relative;
+    left: -50%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.title {
+    color: white;
+    text-align: center;
+    padding-top : 0.25rem;
+    padding-bottom: 0.25rem;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.title.default {
+    background: #65a1e0;
+}
+
+.title.apply {
+    background: #45ad53;
+}
+
+.map {
+    background: rgb(56, 56, 56);
+    text-align: center;
+    padding-bottom : 0.75rem;
+    padding-top: 0.75rem;
+    font-size: 0.9rem;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.notifContainer p {
+    margin: 0;
+}
+
+@media screen and (min-height: 700px) {
+    .workshopListContainer, .workshopListContainerEmpty {
+        height: 55vh;
+    }
+}
+
+@media screen and (min-height: 800px) {
+    .workshopListContainer, .workshopListContainerEmpty {
+        height: 60vh;
+    }
+}
+
+@media screen and (min-height: 900px) {
+    .workshopListContainer, .workshopListContainerEmpty {
+        height: 64vh;
+    }
 }

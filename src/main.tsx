@@ -11,7 +11,8 @@ interface dataType {
             name: string
         },
         workshop: {
-            path: string
+            path: string,
+            active: false | string
         }
     }
 }
@@ -21,12 +22,19 @@ interface filesType {
     thumbnail: false | string
 }
 
+interface notifType {
+    status: boolean,
+    type: string,
+    map: string
+}
+
 const Main = (): React.ReactElement => {
     const [loaded, setLoaded] = useState(false);
     const [dataPath, setDataPath] = useState('');
     const [data, setData] = useState({} as dataType);
     const [workshopFiles, setWorkshopFiles] = useState([] as filesType[]);
-    const [activeFile, setActivefile] = useState('');
+    const [activeFile, setActiveFile] = useState('');
+    const [notif, setNotif] = useState({} as notifType);
 
     useEffect(() => {
         if (!loaded) {
@@ -35,6 +43,7 @@ const Main = (): React.ReactElement => {
             setDataPath(path);
             setData(content);
             if (content.map.workshop.path) getWorkshopList(content.map.workshop.path, 'default', path);
+            if (content.map.workshop.active) setActiveFile(content.map.workshop.active);
             setLoaded(true);
         }
     });
@@ -91,17 +100,18 @@ const Main = (): React.ReactElement => {
 
     const handleSelectWorkshopMap = (e: React.MouseEvent<HTMLElement>): void => {
         const filename = (e.target as HTMLElement).innerText;
-        if (activeFile === filename) setActivefile('');
-        else setActivefile((e.target as HTMLElement).innerText);
+        setActiveFile(activeFile === filename ? '' : filename);
     };
 
     const handleApplyWorkshopMap = (): void => {
-        if (activeFile.length && data.map.default.path) {
+        if (activeFile.length && data.map.default.path && activeFile !== data.map.workshop.active) {
             fs.unlinkSync(data.map.default.path);
             fs.copyFileSync(data.map.workshop.path + '/' + activeFile, data.map.default.path);
             data.status = true;
+            data.map.workshop.active = activeFile;
             setData({ ...data });
             fs.writeFileSync(dataPath + '/data.json', JSON.stringify(data));
+            showNotification('apply', activeFile);
         }
     };
 
@@ -110,22 +120,50 @@ const Main = (): React.ReactElement => {
             fs.unlinkSync(data.map.default.path);
             fs.copyFileSync(dataPath + '/saved/map/' + data.map.default.name, data.map.default.path);
             data.status = false;
+            data.map.workshop.active = false;
             setData({ ...data });
             fs.writeFileSync(dataPath + '/data.json', JSON.stringify(data));
+            showNotification('default', data.map.default.name);
         }
+    };
+
+    const showNotification = (type: string, map: string): void => {
+        const localNotif = {
+            status: true,
+            type: type,
+            map: map
+        };
+        setNotif({
+            ...localNotif
+        });
+        setTimeout(() => {
+            setNotif({
+                ...localNotif,
+                status: false
+            });
+        }, 2000);
     };
 
     if (loaded) {
         return (
-            <div>
+            <div className='RLContainer'>
                 <span className='mainTitle'>
-                    <div className='statusContainer'>
-                        <span className='statusLabel'>
-                            <p>Statut:</p>
-                        </span>
-                        <span className={data.status ? 'statusValue pathG' : 'statusValue pathR'}>
-                            <p>{data.status ? 'Map modifiée' : 'Non modifiée'}</p>
-                        </span>
+                    <div className='topInfosContainer'>
+                        <div className='statusContainer'>
+                            <span className='statusLabel'>
+                                <p>Statut:</p>
+                            </span>
+                            <span className={data.status ? 'statusValue pathG' : 'statusValue pathR'}>
+                                <p>{data.status ? 'Map modifiée' : 'Non modifiée'}</p>
+                            </span>
+                        </div>
+                        {data.map.workshop.active ?
+                            <div className='mapContainer'>
+                                <span className='mapValue'>
+                                    <p>{data.map.workshop.active}</p>
+                                </span>
+                            </div> :
+                            ''}
                     </div>
                     <h1>Rocket League Mapper</h1>
                 </span>
@@ -162,19 +200,21 @@ const Main = (): React.ReactElement => {
                 </div>
                 {workshopFiles && workshopFiles.length ?
                     <div className='workshopListContainer'>
-                        <h3>Mes maps du workshop</h3>
-                        {workshopFiles.map((file, index) => {
-                            return (
-                                <div
-                                    className={file.name === activeFile ? 'workshopItem active' : 'workshopItem'}
-                                    key={index}
-                                    onClick={handleSelectWorkshopMap}
-                                >
-                                    <img src={file.thumbnail ? file.thumbnail : dataPath + '/assets/thumbnail/default.png'} />
-                                    <p>{file.name}</p>
-                                </div>
-                            );
-                        })} </div> :
+                        <h4>Mes maps du workshop</h4>
+                        <div className='workshopList'>
+                            {workshopFiles.map((file, index) => {
+                                return (
+                                    <div
+                                        className={file.name === activeFile ? 'workshopItem active' : 'workshopItem'}
+                                        key={index}
+                                        onClick={handleSelectWorkshopMap}
+                                    >
+                                        <img src={file.thumbnail ? file.thumbnail : dataPath + '/assets/thumbnail/default.png'} />
+                                        <p>{file.name}</p>
+                                    </div>
+                                );
+                            })} </div>
+                    </div> :
                     <div className='workshopListContainerEmpty'>
                         <div className='workshopListEmpty'>
                             <h1>Pas de dossier sélectionné</h1>
@@ -193,6 +233,18 @@ const Main = (): React.ReactElement => {
                     >
                         Remettre par défaut
                     </span>
+                </div>
+                <div className={notif.status ? 'notifContainer active' : 'notifContainer'}>
+                    <div className={notif.type === 'default' ? 'title default' : 'title apply'}>
+                        <p>
+                            {notif.type === 'default' ? 'Map remise par défaut' : 'Map appliquée'}
+                        </p>
+                    </div>
+                    <div className='map'>
+                        <p>
+                            {notif.map}
+                        </p>
+                    </div>
                 </div>
             </div>
         );
