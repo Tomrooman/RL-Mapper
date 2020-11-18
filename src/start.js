@@ -2,6 +2,7 @@ const electron = require('electron');
 const app = electron.app;
 const path = require('path');
 const BrowserWindow = electron.BrowserWindow;
+const nativeImage = electron.nativeImage;
 
 // # Comment for production
 require('dotenv').config();
@@ -12,9 +13,13 @@ let mainWindow;
 if (process.env.NODE_ENV === 'DEV') require('electron-reload');
 
 function createWindow() {
+    const iconPath = process.env.NODE_ENV === 'DEV' ? './src/assets/icons/' : `${path.dirname(app.getPath('exe')) + '/resources/app/src/assets/icons/'}`
+    var image = nativeImage.createFromPath(iconPath + 'icon.png');
+    image.setTemplateImage(true);
     mainWindow = new BrowserWindow({
         width: 800,
         height: 650,
+        icon: image,
         webPreferences: {
             nodeIntegration: true
         }

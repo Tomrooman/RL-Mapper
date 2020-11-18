@@ -4,8 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './assets/css/fonts.css';
 import './assets/css/index.css';
-import Main from './main';
+import Master from './components/master';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<Main />, document.getElementById('root'));
+ReactDOM.render(<Master />, document.getElementById('root'));
 serviceWorker.unregister();

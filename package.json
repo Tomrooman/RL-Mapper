@@ -1,6 +1,6 @@
 {
     "name": "rl_mapper",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "private": true,
     "main": "src/start.js",
     "author": "Tom Rooman",
@@ -13,11 +13,13 @@
     "scripts": {
         "eslint": "eslint .",
         "electron-start": "nodemon --ext js,ts,tsx --exec \"\"yarn electron .\"\"",
-        "make": "electron-packager . \"RL Mapper\" --platform=win32 --arch=x64 --ignore=\"/(app|.yarn|.env|.eslintrc|.yarnrc.yml|tsconfig.json|node_modules|src/index.html|src/index.css|src/index.tsx|src/serviceWorker.ts|src/main.tsx|webpack.config.js|yarn.lock|.gitignore)\"",
+        "make": "electron-packager . \"RL Mapper\" --platform=win32 --arch=x64 --prune=true --overwrite --ignore=\"/(app|.yarn|.env|.eslintrc|.yarnrc.yml|tsconfig.json|node_modules|src/index.html|src/index.css|src/index.tsx|src/serviceWorker.ts|src/main.tsx|webpack.config.js|yarn.lock|.gitignore)\"",
         "dev": "webpack-dev-server --mode development",
         "build": "webpack --mode production"
     },
     "dependencies": {
+        "axios": "^0.21.0",
+        "child_process": "^1.0.2",
         "dotenv": "^8.2.0",
         "electron-packager": "^15.1.0",
         "react": "^17.0.1",

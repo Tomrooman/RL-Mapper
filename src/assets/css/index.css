@@ -1,3 +1,5 @@
+/* ------------------------------ WORKSHOP ------------------------------ */
+
 .RLContainer {
     position :relative;
     height: 97vh;
@@ -207,15 +209,47 @@ body {
     position: absolute;
     width: 100%;
     justify-content: center;
+    align-items: center;
     margin-top: 1.5rem;
+}
+
+.actionContainer.rankings {
+    bottom: 0;
+    margin-bottom: 2rem;
 }
 
 .actionContainer span {
     color: white;
     margin-left: 1rem;
+    margin-right: 1rem;
     border-radius: 5px;
     max-height: 40px;
     padding: 0.5rem 1rem;
+}
+
+.actionContainer p {
+    margin: 0;
+}
+
+.actionContainer .workshopCategory, .actionContainer .mmrCategory {
+    position: absolute;
+    color: white;
+}
+
+.actionContainer .workshopCategory {
+    left: 0;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: 1px solid #5a9271;
+    background: #5da0ac;
+}
+
+.actionContainer .mmrCategory {
+    right: 0;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: 1px solid #5a9271;
+    background: #5da0ac;
 }
 
 .btnApply {
@@ -323,4 +357,77 @@ body {
     .workshopListContainer, .workshopListContainerEmpty {
         height: 64vh;
     }
+}
+
+/* ------------------------------ MMR ------------------------------ */
+.gameStatus {
+    text-align: center;
+}
+
+.gameStatus p {
+    margin: 0;
+    margin-bottom: 1rem;
+}
+
+.mmrContainer {
+    border: 1px solid rgb(206, 206, 206);
+    background: white;
+    text-align: center;
+    /* margin-left: 3rem;
+    margin-right: 3rem; */
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    margin-bottom : 1rem;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgb(196, 196, 196);
+}
+
+.mmrContainer h3 {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background: rgb(54, 54, 54);
+    color: white;
+}
+
+.icon {
+    display: inline-block;
+    /* background: rgb(216, 216, 216); */
+    width: 40%;
+}
+
+.valuesContainer {
+    display: inline-block;
+    position: relative;
+    width: 60%;
+    top: -5.5rem;
+    left: 0;
+}
+
+.values {
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.values p:nth-child(3) {
+    font-size: 1.2rem;
+    margin-top : 0.8rem;
+}
+
+.mmrContainer p, .mmrContainer h3 {
+    margin: 0;
+}
+
+.mmrContainer p {
+    color: black;
+}
+
+.mmrContainer img {
+    height: 100px;
+    width: 100px;
+}
+
+.mainTitle.mmr h1 {
+    padding-bottom :0;
 }

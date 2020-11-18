@@ -1,34 +1,15 @@
 /* eslint-disable no-use-before-define */
 import React, { useState, useEffect } from 'react';
 /* eslint-enable no-use-before-define */
+import BottomMenu from './bottomMenu';
+import { dataType, filesType, notifType } from '../@types/types';
 const fs = window.require('fs');
 
-interface dataType {
-    status: boolean,
-    map: {
-        default: {
-            path: string,
-            name: string
-        },
-        workshop: {
-            path: string,
-            active: false | string
-        }
-    }
+interface propsType {
+    setShowedComponent: React.Dispatch<React.SetStateAction<string>>
 }
 
-interface filesType {
-    name: string,
-    thumbnail: false | string
-}
-
-interface notifType {
-    status: boolean,
-    type: string,
-    map: string
-}
-
-const Main = (): React.ReactElement => {
+const Workshop = (props: propsType): React.ReactElement => {
     const [loaded, setLoaded] = useState(false);
     const [dataPath, setDataPath] = useState('');
     const [data, setData] = useState({} as dataType);
@@ -224,20 +205,14 @@ const Main = (): React.ReactElement => {
                             <h1>Pas de dossier sélectionné</h1>
                         </div>
                     </div>}
-                <div className='actionContainer'>
-                    <span
-                        className={activeFile.length && data.map.default.path ? 'btnApply' : 'btnApplyDisabled'}
-                        onClick={handleApplyWorkshopMap}
-                    >
-                        Appliquer
-                    </span>
-                    <span
-                        className={data.map.default.path && data.status ? 'btnDefault' : 'btnDefaultDisabled'}
-                        onClick={handleApplyDefaultMap}
-                    >
-                        Remettre par défaut
-                    </span>
-                </div>
+                <BottomMenu
+                    type='workshop'
+                    setShowedComponent={props.setShowedComponent}
+                    activeFile={activeFile}
+                    data={data}
+                    handleApplyWorkshopMap={handleApplyWorkshopMap}
+                    handleApplyDefaultMap={handleApplyDefaultMap}
+                />
                 <div className={notif.status ? 'notifContainer active' : 'notifContainer'}>
                     <div className={notif.type === 'default' ? 'title default' : 'title apply'}>
                         <p>
@@ -260,4 +235,4 @@ const Main = (): React.ReactElement => {
     }
 };
 
-export default Main;
+export default Workshop;
